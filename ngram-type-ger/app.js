@@ -10,6 +10,8 @@ var ngramTypeConfig = {
             bigrams: bigrams,
             trigrams: trigrams,
             tetragrams: tetragrams,
+            pentagrams: pentagrams,
+            hexagrams: hexagrams,
             words: words,
             custom_words: null,
 
@@ -40,6 +42,26 @@ var ngramTypeConfig = {
                     phrasesCurrentIndex: 0,
                 },
                 tetragrams: {
+                    scope: 50,
+                    combination: 2,
+                    repetition: 3,
+                    minimumWPM: 40,
+                    minimumAccuracy: 100,
+                    WPMs: [],
+                    phrases: {},
+                    phrasesCurrentIndex: 0,
+                },
+                pentagrams: {
+                    scope: 50,
+                    combination: 2,
+                    repetition: 3,
+                    minimumWPM: 40,
+                    minimumAccuracy: 100,
+                    WPMs: [],
+                    phrases: {},
+                    phrasesCurrentIndex: 0,
+                },
+                hexagrams: {
                     scope: 50,
                     combination: 2,
                     repetition: 3,
@@ -243,11 +265,6 @@ var ngramTypeConfig = {
         },
         refreshPhrases: function() {
             var dataSource = this.dataSource;
-
-            if (dataSource.combination < 1) {
-                dataSource.combination = 1
-            }
-
             dataSource.phrases = this.generatePhrases(dataSource.combination, dataSource.repetition);
             this.expectedPhrase = dataSource.phrases[0];
             dataSource.phrasesCurrentIndex = 0;
